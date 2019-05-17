@@ -34,7 +34,11 @@ cdef class Bezier(object):
 
     cpdef bezier(self, list points):
         cdef int order = len(points)
-        cdef float step = 0.25 / constants.SLIDER_QUALITY / order    #Normaly 0.0025
+        cdef float step
+        if order >= 10:
+            step = 1
+        else:
+            step = 0.25 / constants.SLIDER_QUALITY / order    #Normaly 0.0025
         cdef float i = 0
         cdef int n = order - 1
 
